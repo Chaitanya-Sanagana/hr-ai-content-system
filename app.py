@@ -111,4 +111,4 @@ with gr.Blocks() as demo:
 
         eval_btn.click(run_evaluation, outputs=eval_output)
 
-demo.launch()
+demo.launch(server_name="0.0.0.0", server_port=7860)
