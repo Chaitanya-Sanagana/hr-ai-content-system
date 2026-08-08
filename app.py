@@ -13,6 +13,9 @@ SIMILARITY_THRESHOLD = 0.20
 
 
 def retrieve_results(query, role="employee"):
+    if not query or not query.strip():
+        return []
+
     text = load_documents("data/sample_hr_docs.txt")
     chunks = chunk_text(text)
     enriched = add_metadata(chunks)
@@ -67,7 +70,7 @@ def process_and_query(query, role):
 
 def run_evaluation():
     eval_results, accuracy = evaluate_system(
-        lambda q: retrieve_results(q, role="employee")
+        lambda q: process_and_query(q, role="employee")
     )
 
     output = ""

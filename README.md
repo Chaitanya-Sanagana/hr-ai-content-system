@@ -10,75 +10,40 @@ pinned: false
 
 # 🤖 HR AI Content System
 
-An AI-ready content optimization system that transforms unstructured HR content into structured, governed, and retrievable knowledge assets.
+An AI-ready content engineering demo for transforming HR policy text into structured, retrievable, governed knowledge assets.
 
-This project demonstrates how enterprise HR content can be prepared for AI-powered employee experiences using semantic processing, metadata design, governance controls, and retrieval workflows.
+This project shows how enterprise content can be prepared for AI-powered employee support using ingestion, chunking, metadata, embeddings, retrieval, RBAC-style filtering, PII redaction, and evaluation.
 
----
+## What it demonstrates
 
-## Problem
-
-HR knowledge is often scattered across policy documents, FAQs, and internal content that may be difficult to search, govern, or reuse effectively in AI systems.
-
-Common issues include:
-
-- Unstructured or inconsistent content
-- Weak discoverability
-- Poor metadata and taxonomy
-- Lack of governance controls
-- Limited readiness for AI retrieval systems
-
----
-
-## Solution
-
-HR AI Content System simulates a full AI-ready content pipeline for HR knowledge.
-
-It includes:
-
-- Content ingestion
+- AI-ready content pipeline design
+- HR knowledge-base preparation
 - Semantic chunking
-- Metadata tagging
-- Embeddings and retrieval
-- Governance controls
-- Evaluation workflows
+- Metadata and taxonomy tagging
+- Sentence Transformer embeddings
+- Vector-style similarity retrieval
+- Role-based answer filtering
+- PII redaction patterns
+- Golden-set evaluation workflow
+- Gradio demo interface
 
-The goal is to convert raw HR content into structured knowledge that is easier to retrieve, govern, and use safely in AI-driven employee support experiences.
+## Why it matters
 
----
+Many enterprise AI projects fail because the underlying content is messy, unstructured, or weakly governed. This project demonstrates the content-preparation layer needed before HR knowledge can be safely reused in AI search, assistants, or employee self-service workflows.
 
-## Key Features
+## Features
 
-- AI-ready HR content pipeline
-- Semantic chunking and structured formatting
-- Metadata tagging and traceability
-- Embeddings-based retrieval
-- Role-based access control (RBAC)
-- PII redaction support
-- Safe handling of irrelevant queries
-- Retrieval quality evaluation with a golden dataset
+- Load sample HR policy content
+- Split content into retrievable chunks
+- Attach document metadata
+- Generate embeddings
+- Retrieve top matching policy chunks
+- Apply employee/HR role filtering
+- Redact sensitive text for employee-facing answers
+- Run a simple evaluation set for expected-answer coverage
+- Safely reject irrelevant queries when confidence is low
 
----
-
-## Example Queries
-
-### Relevant
-
-- How many PTO days do employees get?
-- Can PTO be carried over?
-- How long is parental leave?
-- How many sick leave days are given?
-- How many days can employees work remotely?
-
-### Safely Rejected as Irrelevant
-
-- What is the company stock price?
-- Who is the CEO?
-- Tell me a joke
-
----
-
-## Technology Stack
+## Tech stack
 
 - Python
 - Gradio
@@ -86,28 +51,18 @@ The goal is to convert raw HR content into structured knowledge that is easier t
 - NumPy
 - Scikit-learn
 
----
-
-## How It Works
-
-1. Load or ingest HR content  
-2. Apply semantic chunking and structure optimization  
-3. Tag content with metadata and taxonomy  
-4. Generate embeddings for retrieval  
-5. Apply governance controls such as RBAC and PII filtering  
-6. Retrieve relevant information for grounded responses  
-7. Evaluate performance using a labeled question set  
-
----
-
-## Project Structure
+## Project structure
 
 ```text
 hr-ai-content-system/
 ├── app.py
 ├── requirements.txt
+├── .env.example
+├── .gitignore
+├── DEPLOYMENT_CHECKLIST.md
 ├── README.md
 ├── pipeline/
+│   ├── __init__.py
 │   ├── ingestion.py
 │   ├── chunking.py
 │   ├── metadata.py
@@ -117,31 +72,77 @@ hr-ai-content-system/
 │   └── evaluation.py
 └── data/
     └── sample_hr_docs.txt
-```   
----
+```
 
-## Why This Project Matters
+## Example questions
 
-This project demonstrates:
+- How many PTO days do employees get?
+- Can PTO be carried over?
+- How long is parental leave?
+- How many sick leave days are given?
+- How many days can employees work remotely?
+- What sensitive information should not be shared?
 
-- AI-ready content engineering
-- retrieval-augmented knowledge system design
-- metadata and taxonomy thinking
-- governance-aware AI workflows
-- evaluation-driven AI development
+## Run locally
 
-## Important Note
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
 
-This project is a prototype/demo build created to showcase AI-ready content processing, governance-aware retrieval, and enterprise-style knowledge system design.
+On Windows PowerShell:
 
----
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+```
 
-## 🔗 Links & Attribution
+## Environment variables
 
-### 🌐 Live Demo
-[![Live Demo](https://img.shields.io/badge/Demo-HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/spaces/Chaitanya-Sanagana/hr-ai-content-system)
+The default demo does not require API keys. Embeddings run locally through Sentence Transformers.
 
-### 👤 Author
-**Chaitanya Sanagana**
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Chaitanya-Sanagana)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/chaitanya-sai-sanagana-8a1827263)
+Use `.env.example` as a safe template only. Do not commit a real `.env` file.
+
+## Deployment notes
+
+This project is compatible with Hugging Face Spaces using the Gradio SDK metadata at the top of this README.
+
+Suggested Space name:
+
+```text
+hr-ai-content-system
+```
+
+## Limitations
+
+- Uses sample HR content, not a real enterprise HRIS or document repository.
+- Retrieval is local and lightweight.
+- RBAC and PII filtering are demo patterns, not enterprise identity controls.
+- This project is for AI engineering portfolio demonstration, not HR/legal advice.
+
+## Roadmap
+
+- Add file upload for custom HR documents
+- Add richer metadata taxonomy
+- Add department/region filters
+- Add stronger PII detection
+- Add answer citation formatting
+- Add dashboard-style retrieval evaluation metrics
+
+## Author
+
+**Chaitanya S.**  
+Applied AI Engineer | Generative AI · RAG · Agentic AI · AI Platform Engineering
+
+- GitHub: `github.com/ChaitanyaAI-Dev/hr-ai-content-system`
+- LinkedIn: `linkedin.com/in/chaitanyaai-dev`
+- Hugging Face: `huggingface.co/ChaitanyaAI-Dev`
+- Portfolio: `chaitanyaai-dev-portfolio.vercel.app`
+
+## Disclaimer
+
+This is a prototype/demo project for AI engineering portfolio purposes. It is not HR, legal, regulatory, or compliance advice.
